@@ -107,25 +107,26 @@ Type_list = set([i for i in Jeju_Cdict.keys()])
 #     plt.savefig("../Images/{}.png".format(i))
 #     plt.close()
 ########################################
-#수평형 예시
-read_imgs = "D:/GAT/Jeju/Images/건강진단.png"
-plt.imshow(mpimg.imread(read_imgs))
-
-#양극화 예시
-read_imgs = "D:/GAT/Jeju/Images/골프경기장.png"
-plt.imshow(mpimg.imread(read_imgs))
+# #수평형 예시
+# read_imgs = "D:/GAT/Jeju/Images/건강진단.png"
+# plt.imshow(mpimg.imread(read_imgs))
+#
+# #양극화 예시
+# read_imgs = "D:/GAT/Jeju/Images/골프경기장.png"
+# plt.imshow(mpimg.imread(read_imgs))
 
 
 ########################################
-# 사진합치기
+# # 사진합치기
 # read_imgs = "../Images/*.png"
 # read_imgs = glob(read_imgs)
+# print(len(read_imgs))
 # img_list = defaultdict(list)
 # pic_list = []
 # Ax = 0
 # for index, img in enumerate(tqdm(read_imgs)):
 #     xA = (index // 10)
-#     if xA == Ax and index != 193:
+#     if xA == Ax and index != 205:
 #         img = plt.imread(img)
 #         img_list[xA].append(img)
 #
@@ -136,10 +137,10 @@ plt.imshow(mpimg.imread(read_imgs))
 #         img_list[xA].append(img)
 #         Ax = xA
 #
-#     elif index == 193:
+#     elif index == 205:
 #         img = plt.imread(img)
 #         img_list[xA].append(img)
-#         A = np.zeros((300,1800,4))
+#         A = np.zeros((300,1200,4))
 #         img_list[xA].append(A)
 #         fig = np.concatenate(img_list[xA], axis=1)
 #         pic_list.append(fig)
@@ -148,7 +149,7 @@ plt.imshow(mpimg.imread(read_imgs))
 # plt.imsave("../images/picture.png", pic)
 ##########################################################
 '''
-재난지원금이 많이 사용되었던 곳이 어디었는지 알기 위해 
+재난지원금이 많이 사용되었던 곳이 어디었는지 알기 위해
 재난지원금 사용금액/ 총 사용금액으로 조사했습니다.
 '''
 
@@ -189,7 +190,7 @@ for i,v in Total_Jeju.items():
 '''
 100여개의 재난지원금 / 총 사용금액 비율
 '''
-# sns.set(rc={'figure.figsize':(20,20)})
+
 plt.rc('font', family='Malgun Gothic')
 plt.rc('axes', unicode_minus=False)
 g = sns.catplot(x="업종", y="재난지원금 사용금액 / 총 사용금액", hue="소상공인", data=data)
@@ -201,7 +202,7 @@ plt.close()
 
 
 '''
-재난지원금이 자주 쓰였던 곳이 어디었는지 알기 위해 
+재난지원금이 자주 쓰였던 곳이 어디었는지 알기 위해
 재난지원금 사용횟수/ 총 사용횟수으로 재난지원금 횟수가 높은 업소를 찾아보았습니다.
 '''
 Jeju_NoS = pd.concat((Jeju1["NumofSpent"] , Jeju2["NumofSpent"] , Jeju3["NumofSpent"] , Jeju4["NumofSpent"]))
@@ -322,12 +323,12 @@ TOP4가 먹는 것과 관련이 있어 주로 먹는 데에 재난지원금이 �
 2.시간에 따른 월 별 총 사용금액
 3.시간에 따른 월 별 재난지원금 사용횟수
 4.시간에 따른 월 별 총 사용횟수
-재난지원금 사용금액 부분에서 큰 차이를 발견하였는데 
+재난지원금 사용금액 부분에서 큰 차이를 발견하였는데
 5월에서 8월로 갈수록 금액의 양이 줄어드는 것을 확인할 수 있었습니다.
 즉, 재난지원금을 빠르게 소비하였습니다.
 
 재난지원금 사용금액과 재난지원금 이용 횟수는 줄어든 반면, 총 사용금액과 횟수는 늘어난 것을 보면
-개별적으로는 다르겠지만 재난지원금이 총 사용금액을 전체적으로는 보완해주는 것을 알 수 있었습니다. 
+개별적으로는 다르겠지만 재난지원금이 총 사용금액을 전체적으로는 보완해주는 것을 알 수 있었습니다.
 재난지원금을 월마다 균등하게 사용할 수 있도록 방법을 고려하는 것이 필요할 수 있다고 여겨집니다.
 '''
 Jeju_Type = pd.concat((Jeju1["Type"] , Jeju2["Type"] , Jeju3["Type"] , Jeju4["Type"]))
@@ -351,6 +352,90 @@ axs[1,0].set_title("재난지원금 사용횟수")
 sns.lineplot(data=Jeju_data, x="Time", y="NumofSpent", hue="YM",ax=axs[1, 1])
 axs[1,1].set_title("총 사용횟수")
 plt.savefig("../Graphs/total_percent.jpg")
+plt.show()
+plt.close()
+
+
+'''
+x시 사용조사
+'''
+x5 = defaultdict(list)
+x6 = defaultdict(list)
+x7 = defaultdict(list)
+x8 = defaultdict(list)
+x5t=[]
+x6t=[]
+x7t=[]
+x8t=[]
+for i in Jeju_data.values:
+    if i[1] == "x시":
+
+        if i[0] == 202005:
+            x5[i[2]].append(i[6])
+            x5t.append(i[6])
+        elif i[0] == 202006:
+            x6[i[2]].append(i[6])
+            x6t.append(i[6])
+        elif i[0] == 202007:
+            x7[i[2]].append(i[6])
+            x7t.append(i[6])
+        elif i[0] == 202008:
+            x8[i[2]].append(i[6])
+            x8t.append(i[6])
+print("5월",sum(x5t),len(x5))
+print("6월",sum(x6t),len(x6))
+print("7월",sum(x7t),len(x7))
+print("8월",sum(x8t),len(x8))
+X5= {}
+X6= {}
+X7= {}
+X8= {}
+for i,v in x5.items():
+    X5[i] = sum(v)
+for i,v in x6.items():
+    X6[i] = sum(v)
+for i,v in x7.items():
+    X7[i] = sum(v)
+for i,v in x8.items():
+    X8[i] = sum(v)
+x5lavel = []
+x5data= []
+x6lavel = []
+x6data= []
+x7lavel = []
+x7data= []
+x8lavel = []
+x8data= []
+for i,v in X5.items():
+    x5lavel.append(i)
+    x5data.append(v)
+for i,v in X6.items():
+    x6lavel.append(i)
+    x6data.append(v)
+for i,v in X7.items():
+    x7lavel.append(i)
+    x7data.append(v)
+for i,v in X8.items():
+    x8lavel.append(i)
+    x8data.append(v)
+x5l,x5d = get_five(x5data,x5lavel)
+x6l,x6d = get_five(x6data,x6lavel)
+x7l,x7d = get_five(x7data,x7lavel)
+x8l,x8d = get_five(x8data,x8lavel)
+plt.rcParams["font.size"] = "10"
+
+plt.rc('font', family='Malgun Gothic')
+plt.rc('axes', unicode_minus=False)
+fig, axs = plt.subplots(2, 2,figsize=(20,20))
+
+axs[0,0].bar(x5l,x5d,color = '#98eff9')
+axs[0,0].set_title("5월 x시")
+axs[0,1].bar(x6l,x6d,color = '#516572')
+axs[0,1].set_title("6월 x시")
+axs[1,0].bar(x5l,x5d,color = '#029386')
+axs[1,0].set_title("7월 x시")
+axs[1,1].bar(x6l,x6d,color = '#13eac9')
+axs[1,1].set_title("8월 x시")
 plt.show()
 plt.close()
 
@@ -422,7 +507,7 @@ plt.show()
 plt.close()
 
 '''
-조사한 시각화 토대로 여러방법이 있겠지만 사람들이 주로 재난지원금을 쓰는 업소를 정하는 기준을 
+조사한 시각화 토대로 여러방법이 있겠지만 사람들이 주로 재난지원금을 쓰는 업소를 정하는 기준을
 재난지원금 사용금액/총 사용금액과 재난지원금 사용횟수 / 총 사용횟수 5대5로 합산하여 선정하였습니다.
 다음은 해당기준으로 상위 20개 업소를 시각화하였습니다.
 '''
@@ -447,6 +532,7 @@ ax.barh(names, data)
 plt.savefig("../Graphs/top20.jpg")
 plt.show()
 plt.close()
+
 '''
 위 내용을 토대로 시각화한 gui를 만들었습니다.
 '''
