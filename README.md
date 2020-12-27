@@ -13,7 +13,7 @@ Run 파일 -> GUI 실행파일
 Setting 파일 -> GUI에서 불러올 html로컬파일 생성
 
 >html파일 생성하는데 제법 많은 시간이 걸립니다. 
->MAP에 전체html파일과 부분html(일부) 올려두었습니다.(12시)
+>MAP에 전체html파일과 부분html 올려두었습니다
 
 visual파일 -> 시각화 파일
 
