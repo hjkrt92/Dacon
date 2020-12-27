@@ -9,6 +9,7 @@
 ### Main파일
 
 Run 파일 -> GUI 실행파일 
+>"D:/GAT/Jeju/MAP/" -> "개인폴더주소"로 변경해야 됩니다.
 
 Setting 파일 -> GUI에서 불러올 html로컬파일 생성
 
